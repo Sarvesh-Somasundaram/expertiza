@@ -3,7 +3,7 @@
 <%= form_for @penalty_policy, :url => { :action => "create" } do |f| %>
   # <%= error_messages_for @penalty_policy %>
 
-<% unless @penalty_policy.errors.full_messages.any? { |message| message.include?("error with ") } %>
+<% unless @penalty_policy.errors.full_messages.any? { |message| message.include?("Failed to save the assignment: ") } %>
   <%= error_messages_for @penalty_policy %>
 <% end %>
 
