@@ -3,6 +3,11 @@
 <%= form_for @penalty_policy, :url => { :action => "create" } do |f| %>
   # <%= error_messages_for @penalty_policy %>
 
+<% unless @penalty_policy.errors.full_messages.any? { |message| message.include?("error with ") } %>
+  <%= error_messages_for @penalty_policy %>
+<% end %>
+
+
   <%= render partial: 'form', locals: { f: f } %>
 
   <%= f.submit 'Create' %>
