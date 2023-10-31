@@ -1,21 +1,14 @@
 <h1>New late policy</h1>
 
 <%= form_for @penalty_policy, :url => { :action => "create" } do |f| %>
-  <% unless @penalty_policy.errors.full_messages.any? { |message| message.start_with?("Failed to") } %>
-    <%= error_messages_for @penalty_policy %>
-  <% end %>
-
-  <% unless @penalty_policy.errors.full_messages.any? { |message| message.include?("error with ") } %>
-  <%= error_messages_for @penalty_policy %>
-<% end %>
+  <%= custom_error_messages_for @penalty_policy %>
 
   <%= render partial: 'form', locals: { f: f } %>
+
   <%= f.submit 'Create' %>
 <% end %>
 
 <br>
 <br>
-
-<%= link_to 'Back', "#{request.referer}#tabs-5" %>
-
-
+# <%= link_to 'Crack', :controller=> 'assignments', :action => 'edit', :id=>session[:assignment]%>
+<%= link_to 'Back', request.referer %>

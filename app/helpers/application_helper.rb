@@ -26,4 +26,18 @@ module ApplicationHelper
   def text_field_with_auto_complete(model, field, options)
     text_field_tag "#{model}[#{field}]", '', options
   end
+
+  def custom_error_messages_for(object)
+    return unless object.errors.any?
+
+    messages = object.errors.full_messages.reject do |message|
+      message.include?("Failed to save the assignment: #")
+    end
+
+    return if messages.empty?
+
+    content_tag(:div, class: 'error_messages') do
+      messages.map { |message| content_tag(:li, message) }.join.html_safe
+    end
+  end
 end
