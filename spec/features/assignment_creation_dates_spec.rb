@@ -13,14 +13,10 @@ describe 'assignment creation due dates', js: true do
   it "is able to go to new late policy and then go back to due dates tab and does not see the error message when navigating to the new late policy page" do
     # Navigate to the new late policy page
     find_link('New late policy').click
-
     # Ensure the error message is not displayed on the page
     expect(page).not_to have_content("Failed to save the assignment: #")
-
     click_button 'Back'
-    
     expect(page.current_url).to include('#tabs-5')
-
   end
 
   it 'is able to create assignment with a new late policy' do # This case doesn't work in expertiza yet, i.e. not able to create new late policy.
