@@ -10,9 +10,13 @@ describe 'assignment creation due dates', js: true do
     click_link 'Due date'
   end
 
-
-  it 'is able to go to new late policy and then go back to due dates tab' do 
+  it "is able to go to new late policy and then go back to due dates tab and does not see the error message when navigating to the new late policy page" do
+    # Navigate to the new late policy page
     find_link('New late policy').click
+
+    # Ensure the error message is not displayed on the page
+    expect(page).not_to have_content("Failed to save the assignment: #")
+
     click_button 'Back'
     
     expect(page.current_url).to include('#tabs-5')
