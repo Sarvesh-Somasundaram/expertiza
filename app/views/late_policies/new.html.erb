@@ -1,15 +1,11 @@
 <h1>New late policy</h1>
 
 <%= form_for @penalty_policy, :url => { :action => "create" } do |f| %>
-  #<%= error_messages_for @penalty_policy %>
-
-<% unless @penalty_policy.errors.full_messages.any? { |message| message.include?("Failed to save the assignment: ") } %>
-  <%= error_messages_for @penalty_policy %>
-<% end %>
-
+  <% unless @penalty_policy.errors.full_messages.any? { |message| message.start_with?("Failed to") } %>
+    <%= error_messages_for @penalty_policy %>
+  <% end %>
 
   <%= render partial: 'form', locals: { f: f } %>
-
   <%= f.submit 'Create' %>
 <% end %>
 
@@ -17,4 +13,5 @@
 <br>
 
 <%= link_to 'Back', "#{request.referer}#tabs-5" %>
+
 
