@@ -19,6 +19,17 @@ describe 'assignment creation due dates', js: true do
     expect(page.current_url).to include('#tabs-5')
   end
 
+  it "is able to create a new late policy and go back from the list of policies to the due date tab" do
+    # Navigate to the new late policy page
+    find_link('New late policy').click
+    fill_in 'late_policy_policy_name', with: 'testlatepolicy'
+    fill_in 'late_policy_penalty_per_unit', with: 5
+    fill_in 'late_policy_max_penalty', with: 10
+    click_button 'Create'
+    click_button 'Back'
+    expect(page.current_url).to include('#tabs-5')
+  end
+
   it 'is able to create assignment with a new late policy' do # This case doesn't work in expertiza yet, i.e. not able to create new late policy.
     find_link('New late policy').click
     fill_in 'late_policy_policy_name', with: 'testlatepolicy'
