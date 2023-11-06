@@ -48,10 +48,10 @@ class AssignmentsController < ApplicationController
         assignment_form_params[:assignment_questionnaire] = ques_array
         assignment_form_params[:due_date] = due_array
         @assignment_form.update(assignment_form_params, current_user)
-        aid = Assignment.find(@assignment_form.assignment.id).id
+        assignment_id = Assignment.find(@assignment_form.assignment.id).id
         ExpertizaLogger.info "Assignment created: #{@assignment_form.as_json}"
-        session[:assignment_id] = aid
-        redirect_to edit_assignment_path aid
+        session[:assignment_id] = assignment_id
+        redirect_to edit_assignment_path assignment_id
         undo_link("Assignment \"#{@assignment_form.assignment.name}\" has been created successfully. ")
         return
       else
@@ -307,9 +307,9 @@ class AssignmentsController < ApplicationController
     assignment_form_params[:assignment][:id] = exist_assignment.id.to_s
     fix_assignment_missing_path
     update_assignment_form(exist_assignment)
-    aid = Assignment.find_by(name: @assignment_form.assignment.name).id
+    assignment_id = Assignment.find_by(name: @assignment_form.assignment.name).id
     ExpertizaLogger.info "Assignment created: #{@assignment_form.as_json}"
-    redirect_to edit_assignment_path aid
+    redirect_to edit_assignment_path assignment_id
     undo_link("Assignment \"#{@assignment_form.assignment.name}\" has been created successfully. ")
   end
 
