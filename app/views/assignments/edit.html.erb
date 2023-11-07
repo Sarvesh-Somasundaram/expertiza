@@ -126,6 +126,14 @@
       $('#go_to_tabs2').click(function(){
         $('#Rubrics').click();
       });
+      # this piece of code links any late-polcy page back to the due dates page if it is clicked
+      # fixes issues 2 and 3
+      jQuery(document).ready(function() {
+        var referrer =  document.referrer;
+        if(referrer.includes("late_policies")){                     
+          $('#DueDates').click();
+        }  
+      }); 
     </script>
   <% end %>
 
