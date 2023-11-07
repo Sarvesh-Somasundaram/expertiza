@@ -80,6 +80,7 @@ class AssignmentForm
   # Code to update values of assignment
   def update_assignment(attributes)
     unless @assignment.update_attributes(attributes)
+      # changed all .to_s to full_messages to see the full error
       @errors = @assignment.errors.full_messages
       @has_errors = true
     end

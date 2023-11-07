@@ -48,6 +48,8 @@ class AssignmentsController < ApplicationController
         assignment_form_params[:assignment_questionnaire] = ques_array
         assignment_form_params[:due_date] = due_array
         @assignment_form.update(assignment_form_params, current_user)
+
+        # changed aid to assignment_id and passed that into the session to keep track of the correct id value
         assignment_id = Assignment.find(@assignment_form.assignment.id).id
         ExpertizaLogger.info "Assignment created: #{@assignment_form.as_json}"
         session[:assignment_id] = assignment_id
@@ -72,6 +74,7 @@ class AssignmentsController < ApplicationController
 
   # edits an assignment's deadlines and assigned rubrics
   def edit
+    # add the assignment_id here for the session
     session[:assignment_id] = nil
     user_timezone_specified
     edit_params_setting
@@ -113,6 +116,7 @@ class AssignmentsController < ApplicationController
 
   # displays an assignment via ID
   def show
+    # add the assignment_id here for the session
     session[:assignment_id] = nil
     @assignment = Assignment.find(params[:id])
     session[:assignment_id] = @assignment.id
