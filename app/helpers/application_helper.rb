@@ -31,7 +31,7 @@ module ApplicationHelper
     return unless object.errors.any?
 
     messages = object.errors.full_messages.reject do |message|
-      message.include?("Failed to save the assignment: #")
+      message.include?('Failed to save the assignment: #')
     end
 
     return if messages.empty?
